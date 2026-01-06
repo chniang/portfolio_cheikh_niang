@@ -33,7 +33,19 @@ st.markdown("""
     setTimeout(forceScroll, 200);
     setTimeout(forceScroll, 400);
     setTimeout(forceScroll, 800);
-})();
+}})();
+
+// FORCER LA SIDEBAR À RESTER OUVERTE
+setTimeout(function() {
+    const sidebar = document.querySelector('[data-testid="stSidebar"]');
+    if (sidebar) {
+        sidebar.setAttribute('aria-expanded', 'true');
+        const collapseBtn = document.querySelector('[data-testid="collapsedControl"]');
+        if (collapseBtn && sidebar.getAttribute('aria-expanded') === 'false') {
+            collapseBtn.click();
+        }
+    }
+}, 500);
 </script>
 """, unsafe_allow_html=True)
 
@@ -77,6 +89,63 @@ st.markdown("""
         font-size: 1.05rem !important;
         font-weight: 600 !important;
         box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3) !important;
+    }
+    /* AMÉLIORATION SIDEBAR - Boutons plus visibles */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #1A1F3A 0%, #0D1117 100%);
+        border-right: 1px solid rgba(0, 217, 255, 0.3) !important;
+    }
+    
+    [data-testid="stSidebar"] .stMarkdown {
+        color: #FFFFFF !important; 
+        font-size: 1.1rem !important; 
+        font-weight: 600 !important;
+    }
+    
+    [data-testid="stSidebar"] h3 {
+        color: #00D9FF !important; 
+        font-size: 1.4rem !important;
+        font-weight: 800 !important;
+        text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+    }
+    
+    [data-testid="stSidebar"] p {
+        color: #E8EAED !important; 
+        font-size: 1rem !important;
+    }
+    
+    [data-testid="stSidebar"] button[kind="secondary"] {
+        background: rgba(26, 31, 58, 0.6) !important;
+        color: #FFFFFF !important;
+        border: 2px solid rgba(0, 217, 255, 0.3) !important;
+        border-radius: 12px !important;
+        padding: 0.85rem 1.2rem !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+    }
+    
+    [data-testid="stSidebar"] button[kind="secondary"]:hover {
+        background: rgba(0, 217, 255, 0.2) !important;
+        border-color: #00D9FF !important;
+        color: #00D9FF !important;
+        transform: translateX(5px) !important;
+        box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+    }
+    
+    [data-testid="stSidebar"] button[kind="primary"] {
+        background: linear-gradient(135deg, #00D9FF 0%, #667EEA 100%) !important;
+        border: 2px solid #00D9FF !important;
+        color: #FFFFFF !important;
+        border-radius: 12px !important;
+        padding: 0.85rem 1.2rem !important;
+        font-size: 1.1rem !important;
+        font-weight: 700 !important;
+        box-shadow: 0 5px 20px rgba(0, 217, 255, 0.4) !important;
+    }
+    
+    [data-testid="stSidebar"] button[kind="primary"]:hover {
+        transform: scale(1.05) !important;
+        box-shadow: 0 8px 30px rgba(0, 217, 255, 0.6) !important;
     }
     
     .profile-img {width: 200px !important; height: 200px !important; border-radius: 50% !important; border: 4px solid #00D9FF !important; box-shadow: 0 10px 40px rgba(0, 217, 255, 0.4) !important; object-fit: cover !important; display: block !important; margin: 2rem auto !important;}
@@ -276,4 +345,5 @@ elif st.session_state.page == "Contact":
         st.link_button("💻 GitHub", PERSONAL_INFO["github"], use_container_width=True)
 
 st.markdown('<p style="text-align: center; color: #8B9DC3; margin-top: 4rem; padding: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">© 2025 Cheikh Niang • Data Scientist Junior • Dakar, Sénégal 🇸🇳</p>', unsafe_allow_html=True)
+
 
