@@ -14,6 +14,7 @@ def get_image_base64(image_path):
 st.markdown("""
 <script>
 (function() {
+    // SCROLL
     function forceScroll() {
         window.scrollTo(0, 0);
         window.scroll(0, 0);
@@ -23,8 +24,6 @@ st.markdown("""
         if (main) main.scrollTop = 0;
         const stApp = document.querySelector('.stApp');
         if (stApp) stApp.scrollTop = 0;
-        const block = document.querySelector('[data-testid="stVerticalBlock"]');
-        if (block) block.scrollTop = 0;
     }
     forceScroll();
     setTimeout(forceScroll, 10);
@@ -33,19 +32,40 @@ st.markdown("""
     setTimeout(forceScroll, 200);
     setTimeout(forceScroll, 400);
     setTimeout(forceScroll, 800);
-}})();
-
-// FORCER LA SIDEBAR À RESTER OUVERTE
-setTimeout(function() {
-    const sidebar = document.querySelector('[data-testid="stSidebar"]');
-    if (sidebar) {
-        sidebar.setAttribute('aria-expanded', 'true');
+    
+    // FORCER SIDEBAR OUVERTE - MutationObserver
+    function keepSidebarOpen() {
+        const sidebar = document.querySelector('[data-testid="stSidebar"]');
+        if (sidebar) {
+            // Supprimer l'attribut qui cache la sidebar
+            sidebar.removeAttribute('aria-hidden');
+            sidebar.style.transform = 'translateX(0)';
+            sidebar.style.visibility = 'visible';
+            sidebar.style.display = 'block';
+        }
+        
+        // Cacher le bouton de collapse
         const collapseBtn = document.querySelector('[data-testid="collapsedControl"]');
-        if (collapseBtn && sidebar.getAttribute('aria-expanded') === 'false') {
-            collapseBtn.click();
+        if (collapseBtn) {
+            collapseBtn.style.display = 'none';
         }
     }
-}, 500);
+    
+    // Exécuter immédiatement
+    keepSidebarOpen();
+    setTimeout(keepSidebarOpen, 100);
+    setTimeout(keepSidebarOpen, 500);
+    setTimeout(keepSidebarOpen, 1000);
+    
+    // Observer les changements du DOM
+    const observer = new MutationObserver(keepSidebarOpen);
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['aria-hidden', 'style', 'class']
+    });
+})();
 </script>
 """, unsafe_allow_html=True)
 
@@ -197,6 +217,23 @@ st.markdown("""
     .skill-bar {background: #1A1F3A; height: 10px; border-radius: 10px; overflow: hidden; margin: 0.5rem 0;}
     .skill-progress {background: linear-gradient(90deg, #00D9FF 0%, #667EEA 100%); height: 100%;}
     
+
+    /* CACHER LE BOUTON DE COLLAPSE DE LA SIDEBAR */
+    [data-testid="collapsedControl"] {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    
+    /* FORCER LA SIDEBAR À RESTER VISIBLE */
+    [data-testid="stSidebar"] {
+        transform: translateX(0) !important;
+        visibility: visible !important;
+    }
+    
+    [data-testid="stSidebar"][aria-hidden="true"] {
+        transform: translateX(0) !important;
+        visibility: visible !important;
+    }
     header {visibility: hidden;}
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
@@ -345,5 +382,6 @@ elif st.session_state.page == "Contact":
         st.link_button("💻 GitHub", PERSONAL_INFO["github"], use_container_width=True)
 
 st.markdown('<p style="text-align: center; color: #8B9DC3; margin-top: 4rem; padding: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">© 2025 Cheikh Niang • Data Scientist Junior • Dakar, Sénégal 🇸🇳</p>', unsafe_allow_html=True)
+
 
 
