@@ -434,7 +434,8 @@ elif st.session_state.page == "Projets":
             with col2:
                 st.link_button("🌐 Démo", proj["liens"]["demo"], use_container_width=True)
         if 'notebook' in proj['liens']:
-            with col2:\n                st.link_button("📓 Notebook", proj["liens"]["notebook"], use_container_width=True)
+            with col2:
+                st.link_button("📓 Notebook", proj["liens"]["notebook"], use_container_width=True)
 
 elif st.session_state.page == "Compétences":
     st.markdown('<h1 style="color: #00D9FF; text-align: center; margin-bottom: 2rem; font-weight: 800;">🎯 Stack Technique</h1>', unsafe_allow_html=True)
@@ -458,6 +459,7 @@ elif st.session_state.page == "Contact":
         st.link_button("💻 GitHub", PERSONAL_INFO["github"], use_container_width=True)
 
 st.markdown('<p style="text-align: center; color: #8B9DC3; margin-top: 4rem; padding: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">© 2025 Cheikh Niang • Data Scientist Junior • Dakar, Sénégal 🇸🇳</p>', unsafe_allow_html=True)
+
 
 
 
