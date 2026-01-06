@@ -11,33 +11,28 @@ def get_image_base64(image_path):
     except:
         return None
 
-# SCRIPT POUR FORCER L'OUVERTURE DE LA SIDEBAR
 st.markdown("""
 <script>
-// FORCER L'OUVERTURE DE LA SIDEBAR
-(function openSidebar() {
-    setTimeout(function() {
-        const collapseButton = window.parent.document.querySelector('[data-testid="collapsedControl"]');
-        if (collapseButton) {
-            collapseButton.click();
-        }
-        
-        const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
-        if (sidebar) {
-            sidebar.setAttribute('aria-expanded', 'true');
-            sidebar.style.transform = 'translateX(0)';
-            sidebar.style.visibility = 'visible';
-        }
-    }, 100);
-})();
-
-// SCROLL EN HAUT
-(function scrollTop() {
-    setTimeout(function() {
-        const main = window.parent.document.querySelector('section.main');
+(function() {
+    function forceScroll() {
+        window.scrollTo(0, 0);
+        window.scroll(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        const main = document.querySelector('.main');
         if (main) main.scrollTop = 0;
-        window.parent.scrollTo(0, 0);
-    }, 150);
+        const stApp = document.querySelector('.stApp');
+        if (stApp) stApp.scrollTop = 0;
+        const block = document.querySelector('[data-testid="stVerticalBlock"]');
+        if (block) block.scrollTop = 0;
+    }
+    forceScroll();
+    setTimeout(forceScroll, 10);
+    setTimeout(forceScroll, 50);
+    setTimeout(forceScroll, 100);
+    setTimeout(forceScroll, 200);
+    setTimeout(forceScroll, 400);
+    setTimeout(forceScroll, 800);
 })();
 </script>
 """, unsafe_allow_html=True)
@@ -281,3 +276,4 @@ elif st.session_state.page == "Contact":
         st.link_button("💻 GitHub", PERSONAL_INFO["github"], use_container_width=True)
 
 st.markdown('<p style="text-align: center; color: #8B9DC3; margin-top: 4rem; padding: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">© 2025 Cheikh Niang • Data Scientist Junior • Dakar, Sénégal 🇸🇳</p>', unsafe_allow_html=True)
+
