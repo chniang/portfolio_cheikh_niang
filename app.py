@@ -218,21 +218,98 @@ st.markdown("""
     .skill-progress {background: linear-gradient(90deg, #00D9FF 0%, #667EEA 100%); height: 100%;}
     
 
-    /* CACHER LE BOUTON DE COLLAPSE DE LA SIDEBAR */
-    [data-testid="collapsedControl"] {
-        display: none !important;
-        visibility: hidden !important;
+    
+
+    /* RESPONSIVE - Adaptation à toutes les tailles d'écran */
+    * {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
     }
     
-    /* FORCER LA SIDEBAR À RESTER VISIBLE */
-    [data-testid="stSidebar"] {
-        transform: translateX(0) !important;
-        visibility: visible !important;
+    .hero-name {
+        font-size: clamp(2rem, 5vw, 3.5rem) !important;
+        word-wrap: break-word !important;
     }
     
-    [data-testid="stSidebar"][aria-hidden="true"] {
-        transform: translateX(0) !important;
-        visibility: visible !important;
+    .hero-title {
+        font-size: clamp(1rem, 2.5vw, 1.5rem) !important;
+    }
+    
+    .hero-quote {
+        font-size: clamp(0.85rem, 1.5vw, 1rem) !important;
+        max-width: 90% !important;
+    }
+    
+    .metric-value {
+        font-size: clamp(1.5rem, 4vw, 2.5rem) !important;
+    }
+    
+    .metric-label {
+        font-size: clamp(0.75rem, 1.2vw, 0.9rem) !important;
+    }
+    
+    .card-title {
+        font-size: clamp(1.1rem, 2vw, 1.5rem) !important;
+    }
+    
+    .card-desc {
+        font-size: clamp(0.8rem, 1.2vw, 0.95rem) !important;
+    }
+    
+    .about-title {
+        font-size: clamp(1.3rem, 3vw, 2rem) !important;
+    }
+    
+    .about-text {
+        font-size: clamp(0.85rem, 1.2vw, 1rem) !important;
+    }
+    
+    .project-title-big {
+        font-size: clamp(1.3rem, 3vw, 2rem) !important;
+    }
+    
+    .skill-title {
+        font-size: clamp(1.1rem, 2vw, 1.5rem) !important;
+    }
+    
+    .skill-name {
+        font-size: clamp(0.9rem, 1.5vw, 1.1rem) !important;
+    }
+    
+    .skill-desc {
+        font-size: clamp(0.75rem, 1.1vw, 0.9rem) !important;
+    }
+    
+    .tech-pill {
+        font-size: clamp(0.65rem, 1vw, 0.75rem) !important;
+        padding: 0.2rem 0.6rem !important;
+    }
+    
+    /* Responsive pour petits écrans */
+    @media (max-width: 768px) {
+        .profile-img {
+            width: 150px !important;
+            height: 150px !important;
+        }
+        
+        .metric-card {
+            height: auto !important;
+            min-height: 120px !important;
+            padding: 1rem !important;
+        }
+        
+        .equal-card {
+            height: auto !important;
+            min-height: 250px !important;
+        }
+    }
+    
+    /* Zoom élevé */
+    @media (min-resolution: 150dpi) {
+        .hero-name, .hero-title, .hero-quote,
+        .about-text, .card-desc, .skill-desc {
+            line-height: 1.6 !important;
+        }
     }
     header {visibility: hidden;}
     #MainMenu {visibility: hidden;}
@@ -350,15 +427,14 @@ elif st.session_state.page == "Projets":
                     with col1 if i % 2 == 1 else col2:
                         st.image(f"data:image/png;base64,{img_data}", use_container_width=True)
         st.markdown(f'<div style="margin: 1rem 0;">{tech_pills}</div>', unsafe_allow_html=True)
-        col1, col2, col3 = st.columns(3)
+        col1, col2 = st.columns(2)
         with col1:
             st.link_button("💻 GitHub", proj["liens"]["github"], use_container_width=True)
         if 'demo' in proj['liens']:
             with col2:
                 st.link_button("🌐 Démo", proj["liens"]["demo"], use_container_width=True)
         if 'notebook' in proj['liens']:
-            with col3:
-                st.link_button("📓 Notebook", proj["liens"]["notebook"], use_container_width=True)
+            with col2:\n                st.link_button("📓 Notebook", proj["liens"]["notebook"], use_container_width=True)
 
 elif st.session_state.page == "Compétences":
     st.markdown('<h1 style="color: #00D9FF; text-align: center; margin-bottom: 2rem; font-weight: 800;">🎯 Stack Technique</h1>', unsafe_allow_html=True)
@@ -382,6 +458,7 @@ elif st.session_state.page == "Contact":
         st.link_button("💻 GitHub", PERSONAL_INFO["github"], use_container_width=True)
 
 st.markdown('<p style="text-align: center; color: #8B9DC3; margin-top: 4rem; padding: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">© 2025 Cheikh Niang • Data Scientist Junior • Dakar, Sénégal 🇸🇳</p>', unsafe_allow_html=True)
+
 
 
 
