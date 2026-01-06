@@ -33,38 +33,7 @@ st.markdown("""
     setTimeout(forceScroll, 400);
     setTimeout(forceScroll, 800);
     
-    // FORCER SIDEBAR OUVERTE - MutationObserver
-    function keepSidebarOpen() {
-        const sidebar = document.querySelector('[data-testid="stSidebar"]');
-        if (sidebar) {
-            // Supprimer l'attribut qui cache la sidebar
-            sidebar.removeAttribute('aria-hidden');
-            sidebar.style.transform = 'translateX(0)';
-            sidebar.style.visibility = 'visible';
-            sidebar.style.display = 'block';
-        }
-        
-        // Cacher le bouton de collapse
-        const collapseBtn = document.querySelector('[data-testid="collapsedControl"]');
-        if (collapseBtn) {
-            collapseBtn.style.display = 'none';
-        }
-    }
-    
-    // Exécuter immédiatement
-    keepSidebarOpen();
-    setTimeout(keepSidebarOpen, 100);
-    setTimeout(keepSidebarOpen, 500);
-    setTimeout(keepSidebarOpen, 1000);
-    
-    // Observer les changements du DOM
-    const observer = new MutationObserver(keepSidebarOpen);
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['aria-hidden', 'style', 'class']
-    });
+
 })();
 </script>
 """, unsafe_allow_html=True)
@@ -459,6 +428,7 @@ elif st.session_state.page == "Contact":
         st.link_button("💻 GitHub", PERSONAL_INFO["github"], use_container_width=True)
 
 st.markdown('<p style="text-align: center; color: #8B9DC3; margin-top: 4rem; padding: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">© 2025 Cheikh Niang • Data Scientist Junior • Dakar, Sénégal 🇸🇳</p>', unsafe_allow_html=True)
+
 
 
 
