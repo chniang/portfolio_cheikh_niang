@@ -14,7 +14,7 @@ def get_image_base64(image_path):
 st.markdown("""
 <script>
 (function() {
-    // SCROLL
+    // SCROLL SEULEMENT
     function forceScroll() {
         window.scrollTo(0, 0);
         window.scroll(0, 0);
@@ -32,8 +32,6 @@ st.markdown("""
     setTimeout(forceScroll, 200);
     setTimeout(forceScroll, 400);
     setTimeout(forceScroll, 800);
-    
-
 })();
 </script>
 """, unsafe_allow_html=True)
@@ -428,6 +426,7 @@ elif st.session_state.page == "Contact":
         st.link_button("💻 GitHub", PERSONAL_INFO["github"], use_container_width=True)
 
 st.markdown('<p style="text-align: center; color: #8B9DC3; margin-top: 4rem; padding: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">© 2025 Cheikh Niang • Data Scientist Junior • Dakar, Sénégal 🇸🇳</p>', unsafe_allow_html=True)
+
 
 
 
